@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="students" Class="studentDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.classes" Member="classes">
+    <Type Name="class">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="class_std_info" Member="std_infos" ThisKey="id" OtherKey="class" Type="std_info" />
+    </Type>
+  </Table>
+  <Table Name="dbo.std_info" Member="std_infos">
+    <Type Name="std_info">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="gander" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="totalMarks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="class" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="class_std_info" Member="class1" ThisKey="class" OtherKey="id" Type="class" IsForeignKey="true" />
+    </Type>
+    <InsertFunction FunctionId="FunctionId1">
+      <Argument Parameter="name" Member="name" />
+      <Argument Parameter="gander" Member="gander" />
+      <Argument Parameter="totalmarks" Member="totalMarks" />
+      <Argument Parameter="class" Member="class" />
+    </InsertFunction>
+    <UpdateFunction FunctionId="FunctionId2">
+      <Argument Parameter="id" Member="id" />
+      <Argument Parameter="name" Member="name" />
+      <Argument Parameter="gander" Member="gander" />
+      <Argument Parameter="totalmarks" Member="totalMarks" />
+      <Argument Parameter="class" Member="class" />
+    </UpdateFunction>
+    <DeleteFunction FunctionId="FunctionId3">
+      <Argument Parameter="id" Member="id" />
+    </DeleteFunction>
+  </Table>
+  <Function Name="dbo.SelectAllStudents" Method="SelectAllStudents">
+    <ElementType Name="SelectAllStudentsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="gander" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="totalMarks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="class" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Id="FunctionId1" Name="dbo.insertstudent" Method="insertstudent">
+    <Parameter Name="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="gander" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="totalmarks" Type="System.Int32" DbType="Int" />
+    <Parameter Name="class" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Id="FunctionId3" Name="dbo.deletestudent" Method="deletestudent">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Id="FunctionId2" Name="dbo.updatestudent" Method="updatestudent">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="gander" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="totalmarks" Type="System.Int32" DbType="Int" />
+    <Parameter Name="class" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
